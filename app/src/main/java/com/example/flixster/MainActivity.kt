@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         val movieAdapter = MovieAdapter(this, movies)
         rvMovies.adapter = movieAdapter
         rvMovies.layoutManager = LinearLayoutManager(this)
+        val currentOrientation = this.resources.configuration.orientation
+        Log.i("Orientation", currentOrientation.toString())
 
         val client = AsyncHttpClient()
         client.get(NOW_PLAYING_URL, object: JsonHttpResponseHandler() {
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i(TAG, "onSuccess: JSON data $json")
                 try {
                     val movieJsonArray = json.jsonObject.getJSONArray("results")
-                    movies.addAll(Movie.fromJsonArray(movieJsonArray))
+                    movies.addAll(Movie.fromJsonArray(movieJsonArray, currentOrientation))
                     movieAdapter.notifyDataSetChanged()
                     Log.i(TAG, "Movie list $movies")
                 } catch (e: JSONException) {
