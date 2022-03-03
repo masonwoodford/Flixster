@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 private const val STANDARD = 0
 private const val POPULAR = 1
 
+const val MOVIE_EXTRA = "movie"
 class MovieAdapter(private val context: Context, private val movies: List<Movie>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
-
         val viewHolder = if (viewType == STANDARD) {
             val standardView: View = inflater.inflate(R.layout.item_movie, viewGroup, false)
-            StandardMovieViewHolder(standardView, context)
+            StandardMovieViewHolder(standardView, context, movies)
         } else {
             val popularView: View = inflater.inflate(R.layout.item_movie_popular, viewGroup, false)
-            PopularMovieViewHolder(popularView, context)
+            PopularMovieViewHolder(popularView, context, movies)
         }
 
         return viewHolder
