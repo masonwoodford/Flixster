@@ -55,7 +55,6 @@ class DetailActivity : YouTubeBaseActivity() {
                 val videoKey = movieTrailerJSON.getString("key")
                 initializeYoutube(videoKey)
             }
-
         })
     }
 
